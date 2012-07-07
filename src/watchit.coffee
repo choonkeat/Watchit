@@ -189,7 +189,7 @@ notifyWhenExists = (target, callback) ->
     notifyWhenExists parentDir, ->
       notifyWhenExists target, callback
 
-  path.exists target, (exists) ->
+  fs.exists target, (exists) ->
     return callback() if exists
 
     try

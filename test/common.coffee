@@ -1,4 +1,8 @@
+fs   = require 'fs'
 path = require 'path'
+
+try
+  fs.mkdirSync path.join __dirname, 'fixtures'
 
 global.expect  = require 'expect.js'
 global.delay   = (time, func) ->
@@ -6,7 +10,7 @@ global.delay   = (time, func) ->
     func = time
     time = 50
   setTimeout func, time
-global.fixture = (pathes...) -> path.join __dirname, 'fixtures', pathes...
-global.watchit = watchit = require '../src/watchit'
+global.fixture = (paths...) -> path.join __dirname, 'fixtures', paths...
+global.watchit = watchit = require '../lib/watchit'
 global.conditionalTimeout = watchit.conditionalTimeout
 global.notifyWhenExists = watchit.notifyWhenExists

@@ -38,7 +38,7 @@ describe 'helpers', ->
       child  = fixture 'parent', 'child.test'
       file   = fixture 'parent', 'child.test'
       try
-        fs.unlinkSync parent
+        fs.unlinkSync child
       try
         fs.rmdirSync parent
       delay 40, ->

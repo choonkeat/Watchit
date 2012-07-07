@@ -29,30 +29,3 @@ task 'build', 'Compile CoffeeScript source files', ->
 
 task 'watch', 'Recompile CoffeeScript source files when modified', ->
   watchTargets 'src', build
-
-test = ->
-  suiteNames = [
-    'helpers'
-    'retain'
-    'debounce'
-    'include'
-    'recurse'
-  ]
-  idx = 0
-  do runNextTestSuite = ->
-    suiteName = suiteNames[idx++]
-    command = """
-      {reporters} = require 'nodeunit';
-      reporters.default.run ['#{suiteName}.coffee']
-    """
-    nodeunit?.kill()
-    echo nodeunit = spawn 'coffee', ['-e', command], cwd: 'test'
-    if idx is suiteNames.length
-      setTimeout process.exit, 5000
-    else
-      setTimeout (-> runNextTestSuite()), 2000
-
-task 'test', 'Run the test suite (and re-run if anything changes)', ->
-  nodeunit = null
-  build test
-  watchTargets 'src', 'test', 'Cakefile', -> build test

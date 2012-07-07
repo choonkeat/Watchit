@@ -93,7 +93,12 @@ incomplete. If you run into any problems that you can replicate in a small
 test case, please don't hesitate to report them.
 
 ## Contributing
-Run tests via `./node_modules/.bin/mocha --compilers coffee:coffee-script --require test/common.js --colors --reporter spec`.
+
+* Install dependencies with `npm install`
+* Make changes in `src`
+* Build with `cake build`
+* Add tests under `test`
+* Run tests via `npm test`
 
 ## License
 
