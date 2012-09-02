@@ -133,8 +133,8 @@ watchit = (target, options, callback) ->
           else
             emitter.emit 'rename', target unless options.include
             scanTargetDir() if options.include or options.recurse
-      else
-        throw new Error "Unexpected directory event: #{event}"
+      # else
+      #   throw new Error "Unexpected directory event: #{event}"
 
   scanTargetDir = (initial) ->
     fs.readdir target, (err, items) ->
@@ -147,6 +147,7 @@ watchit = (target, options, callback) ->
             return if err
             isDir = stats.isDirectory()
             if (isDir and options.recurse) or (!isDir and options.include)
+              emitter.setMaxListeners 0
               # `watchit` returns null if target is already watched
               if watchit itemPath, extend({emitter}, options)
                 emitter.emit 'create', itemPath unless initial
